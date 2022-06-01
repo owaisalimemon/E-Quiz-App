@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1072366710277",
+    "project_id": "e-quiz-app",
+    "storage_bucket": "e-quiz-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072366710277:android:c036495bc6a3516c33366c",
+        "android_client_info": {
+          "package_name": "com.example.e_quiz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072366710277-20bh0v2pvhfm4f1ohj47af4eeh3p60ve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4Jo2B0BrlDJXHXIGCw2h04TknHkZWR4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072366710277-20bh0v2pvhfm4f1ohj47af4eeh3p60ve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
