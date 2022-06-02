@@ -1,4 +1,6 @@
 import 'package:e_quiz_app/views/ui/getstartedscreen.dart';
+import 'package:e_quiz_app/views/ui/homeScreen.dart';
+import 'package:e_quiz_app/views/ui/loginorsigninscreen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

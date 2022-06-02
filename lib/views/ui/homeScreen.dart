@@ -5,6 +5,8 @@ import 'package:e_quiz_app/controller/authcontroller.dart';
 import 'package:e_quiz_app/controller/bottomnavcontroller.dart';
 
 import 'package:e_quiz_app/views/ui/getstartedscreen.dart';
+import 'package:e_quiz_app/views/ui/widgets/bubblemenu.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,8 @@ class HomeScreen extends GetView<Bottomnavcontroller> {
         child: Obx(() {
           return Scaffold(
             backgroundColor: Colors.white,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color(0xFF2CB4B3),
               child: Icon(
@@ -34,8 +38,53 @@ class HomeScreen extends GetView<Bottomnavcontroller> {
                 }
               },
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            // floatingActionButton: FloatingActionBubblee(
+            //   items: <Bubblee>[
+            //     // Floating action menu item
+            //     Bubblee(
+            //       image: '',
+            //       title: "",
+            //       iconColor: Colors.white,
+            //       bubbleColor: Colors.transparent,
+            //       icon: Icons.settings,
+            //       titleStyle: TextStyle(fontSize: 0, color: Colors.white),
+            //       onPress: () {
+            //         controller.setanimation().reverse();
+            //       },
+            //     ),
+            //     Bubblee(
+            //       image: '',
+            //       title: "",
+            //       iconColor: Colors.white,
+            //       bubbleColor: Colors.transparent,
+            //       icon: Icons.settings,
+            //       titleStyle: TextStyle(fontSize: 0, color: Colors.white),
+            //       onPress: () {
+            //         controller.setanimation().reverse();
+            //       },
+            //     ),
+            //     Bubblee(
+            //       image: '',
+            //       title: "",
+            //       iconColor: Colors.white,
+            //       bubbleColor: Colors.transparent,
+            //       icon: Icons.settings,
+            //       titleStyle: TextStyle(fontSize: 0, color: Colors.white),
+            //       onPress: () {
+            //         controller.setanimation().reverse();
+            //       },
+            //     ),
+            //   ],
+            //   onPress: () {
+            //     controller.setanimation().isCompleted
+            //         ? controller.setanimation().reverse()
+            //         : controller.setanimation().forward();
+            //   },
+            //   iconColor: Colors.white,
+            //   backGroundColor: Color(0xFF2CB4B3),
+            //   animation: controller.setanimationvariable(),
+            //   iconData: Icons.play_arrow_outlined,
+            // ),
             body: controller.checkforhome.value
                 ? Container(
                     color: Colors.amber,

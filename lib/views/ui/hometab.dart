@@ -1,38 +1,11 @@
+import 'package:e_quiz_app/controller/datacontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-class Liveclass {
-  String image;
-  String title;
-  String subtitle;
-  int questionsno;
-
-  Liveclass(
-      {required this.image,
-      required this.title,
-      required this.subtitle,
-      required this.questionsno});
-}
+import 'package:get/get.dart';
 
 class HomeTab extends StatelessWidget {
+  var controller = Get.put(DataController());
   HomeTab({Key? key}) : super(key: key);
-
-  List<Liveclass> liveclasses = [
-    Liveclass(
-        image: '',
-        title: "Statistics Math Quiz",
-        subtitle: 'Mathematics',
-        questionsno: 12),
-    Liveclass(
-        image: '',
-        title: "Integers Quiz",
-        subtitle: 'Mathematics',
-        questionsno: 8),
-    Liveclass(
-        image: '', title: "Science Quiz", subtitle: 'Science', questionsno: 8),
-    Liveclass(
-        image: '', title: "Music Quiz", subtitle: 'Music', questionsno: 8),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +150,34 @@ class HomeTab extends StatelessWidget {
                                   AssetImage('assets/images/Group 12@2x.png'))),
                     ),
                   ),
+                  Positioned(
+                    top: -90.h,
+                    right: -60.w,
+                    child: Container(
+                      height: 200.h,
+                      width: 150.w,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              opacity: 0.5,
+                              image:
+                                  AssetImage('assets/images/Group 57@2x.png'))),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -90.h,
+                    left: -60.w,
+                    child: Container(
+                      height: 200.h,
+                      width: 150.w,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              opacity: 0.5,
+                              image:
+                                  AssetImage('assets/images/Group 57@2x.png'))),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 80.w),
                     child: Column(
@@ -259,7 +260,7 @@ class HomeTab extends StatelessWidget {
                     ),
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: liveclasses.length,
+                      itemCount: controller.liveclasses.length,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Padding(
@@ -284,14 +285,15 @@ class HomeTab extends StatelessWidget {
                                 ),
                               ),
                               title: Text(
-                                liveclasses[index].title,
+                                controller.liveclasses[index].title,
                                 style: TextStyle(
                                     fontSize: 15.w, color: Colors.black),
                               ),
                               subtitle: Text(
-                                liveclasses[index].subtitle +
+                                controller.liveclasses[index].subtitle +
                                     ' | ' +
-                                    liveclasses[index].questionsno.toString() +
+                                    controller.liveclasses[index].questionsno
+                                        .toString() +
                                     ' Question',
                                 style: TextStyle(
                                     fontSize: 10.w,
