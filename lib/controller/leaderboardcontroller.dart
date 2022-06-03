@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 
 class LeaderboardController extends GetxController {
   LeaderboardController() {
-    selectedprofileindex.value = -1;
+    selectedprofileindex = -1;
   }
   RxInt toggleindex = 0.obs;
 
-  RxInt selectedprofileindex = 0.obs;
+  int selectedprofileindex = 0;
 
   chaangeselectedprofile(index) {
-    selectedprofileindex.value = index;
+    selectedprofileindex = index;
   }
 
   setindex(index) {

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CategoryScreen extends StatelessWidget {
-  var controller = Get.put(DataController());
+  var controller = Get.put(permanent: true, DataController());
   CategoryScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,15 +21,15 @@ class CategoryScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Color(0xff008280),
+              color: const Color(0xff008280),
               size: 26.61.w,
             )),
         centerTitle: true,
         title: Text(
           'Chose Category',
           style: TextStyle(
-              fontSize: 35.w,
-              color: Color(0xff008280),
+              fontSize: 35.sp,
+              color: const Color(0xff008280),
               fontWeight: FontWeight.bold),
         ),
       ),
@@ -46,76 +47,82 @@ class CategoryScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
                     shrinkWrap: true,
-                    itemCount: controller.liveclasses.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.categories!.length,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return Obx(() {
-                        return GestureDetector(
-                          onTap: () {
-                            controller.selectindex(index);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.h,
-                            ),
-                            child: Container(
-                              height: 150.h,
-                              width: 178.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: controller.selectedindex == index
-                                      ? Color(0xff41B9B8)
-                                      : Color(0xff96DAD9)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 65.h,
-                                    width: 67.w,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffABE1E1),
-                                        borderRadius: BorderRadius.circular(4)),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.science_outlined,
-                                        color: controller.selectedindex == index
-                                            ? Colors.white
-                                            : Colors.black,
-                                        size: 49.w,
+                      return GetBuilder<DataController>(
+                        builder: (controller) {
+                          return GestureDetector(
+                            onTap: () {
+                              controller.selectindex(index);
+                              controller.update();
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 5.h,
+                              ),
+                              child: Container(
+                                height: 150.h,
+                                width: 178.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: controller.selectedindex == index
+                                        ? const Color(0xff41B9B8)
+                                        : const Color(0xff96DAD9)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 65.h,
+                                      width: 67.w,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffABE1E1),
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.science_outlined,
+                                          color:
+                                              controller.selectedindex == index
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                          size: 49.w,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  Text(
-                                    controller.liveclasses[index].subtitle,
-                                    style: TextStyle(
-                                        fontSize: 19.w,
-                                        color: controller.selectedindex == index
-                                            ? Colors.white
-                                            : Colors.black),
-                                  ),
-                                  SizedBox(height: 5.h),
-                                  Text(
-                                    controller.liveclasses[index].questionsno
-                                            .toString() +
-                                        " Question",
-                                    style: TextStyle(
-                                        fontSize: 10.w,
-                                        color: controller.selectedindex == index
-                                            ? Colors.white
-                                            : Colors.black),
-                                  )
-                                ],
+                                    SizedBox(height: 15.h),
+                                    Text(
+                                      controller.categories![index].name,
+                                      style: TextStyle(
+                                          fontSize: 19.sp,
+                                          color:
+                                              controller.selectedindex == index
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                    ),
+                                    SizedBox(height: 5.h),
+                                    Text(
+                                      "${controller.liveclasses[0].questionsno} Question",
+                                      style: TextStyle(
+                                          fontSize: 10.sp,
+                                          color:
+                                              controller.selectedindex == index
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      });
+                          );
+                        },
+                      );
                     },
                   ),
                   SizedBox(height: 50.h),

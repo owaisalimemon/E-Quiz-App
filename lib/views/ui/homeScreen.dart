@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:e_quiz_app/controller/authcontroller.dart';
 import 'package:e_quiz_app/controller/bottomnavcontroller.dart';
+import 'package:e_quiz_app/models/usersmodel.dart';
 
 import 'package:e_quiz_app/views/ui/getstartedscreen.dart';
 import 'package:e_quiz_app/views/ui/widgets/bubblemenu.dart';
@@ -13,7 +14,7 @@ import 'package:get/get.dart';
 
 class HomeScreen extends GetView<Bottomnavcontroller> {
   final controller = Get.put(Bottomnavcontroller());
-  HomeScreen({Key? key});
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

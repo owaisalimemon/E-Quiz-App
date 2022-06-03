@@ -1,3 +1,4 @@
+import 'package:e_quiz_app/controller/authcontroller.dart';
 import 'package:e_quiz_app/views/ui/widgets/matchesimagewithcrown.dart';
 import 'package:e_quiz_app/views/ui/widgets/profileinfodesign.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ProfileTab extends StatelessWidget {
-  const ProfileTab({Key? key}) : super(key: key);
+  var usermodel = Get.put(AuthController());
+  ProfileTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class ProfileTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Syed Izhan",
+                        usermodel.userModel!.fullname,
                         style: TextStyle(fontSize: 25.w, color: Colors.black),
                       ),
                       Row(
@@ -93,7 +95,7 @@ class ProfileTab extends StatelessWidget {
                             ProfileInfoDesign(
                                 icon: Icons.grade_outlined,
                                 title: 'Points',
-                                pointsorrank: 1924,
+                                pointsorrank: usermodel.userModel!.points,
                                 hash: false),
                             Container(
                               height: 77.h,
@@ -103,7 +105,7 @@ class ProfileTab extends StatelessWidget {
                             ProfileInfoDesign(
                                 icon: Icons.public,
                                 title: 'World Rank',
-                                pointsorrank: 1364,
+                                pointsorrank: usermodel.userModel!.worldrank,
                                 hash: true),
                             Container(
                               height: 77.h,
@@ -113,7 +115,7 @@ class ProfileTab extends StatelessWidget {
                             ProfileInfoDesign(
                                 icon: Icons.tag,
                                 title: 'Social Rank',
-                                pointsorrank: 33,
+                                pointsorrank: usermodel.userModel!.socialrank,
                                 hash: true)
                           ],
                         ),

@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MonthyTabDesign extends StatelessWidget {
-  MonthyTabDesign({required this.controller});
+  MonthyTabDesign({Key? key}) : super(key: key);
 
-  LeaderboardController controller;
+  var controller = Get.put(permanent: true, LeaderboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -162,43 +162,47 @@ class MonthyTabDesign extends StatelessWidget {
                               ),
                             ],
                           ),
-                          trailing: Obx(() {
-                            return Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    if (controller.selectedprofileindex ==
-                                        index) {
-                                      Get.to(LoginScreen());
-                                    }
-                                    controller.chaangeselectedprofile(index);
-                                  },
-                                  child: Container(
-                                    height: 22.h,
-                                    width:
-                                        controller.selectedprofileindex == index
-                                            ? 49.24.w
-                                            : 15.w,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xff2CB4B3),
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        controller.selectedprofileindex == index
-                                            ? "Profile"
-                                            : ' ',
-                                        style: TextStyle(
-                                            fontSize: 12.w,
-                                            color: Colors.white),
+                          trailing: GetBuilder<LeaderboardController>(
+                            builder: ((controller) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (controller.selectedprofileindex ==
+                                          index) {
+                                        Get.to(LoginScreen());
+                                      }
+                                      controller.chaangeselectedprofile(index);
+                                      controller.update();
+                                    },
+                                    child: Container(
+                                      height: 22.h,
+                                      width: controller.selectedprofileindex ==
+                                              index
+                                          ? 49.24.w
+                                          : 15.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff2CB4B3),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10))),
+                                      child: Center(
+                                        child: Text(
+                                          controller.selectedprofileindex ==
+                                                  index
+                                              ? "Profile"
+                                              : ' ',
+                                          style: TextStyle(
+                                              fontSize: 12.w,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            );
-                          })),
+                                  )
+                                ],
+                              );
+                            }),
+                          )),
                     ),
                   ),
                 );

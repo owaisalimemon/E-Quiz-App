@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class LeaderBoardTab extends StatelessWidget {
-  var controller = Get.put(LeaderboardController());
+  var controller = Get.put(permanent: true, LeaderboardController());
   LeaderBoardTab({Key? key}) : super(key: key);
 
   @override
@@ -35,36 +35,39 @@ class LeaderBoardTab extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Center(
-            child: ToggleSwitch(
-              initialLabelIndex: controller.toggleindex.value,
-              totalSwitches: 2,
-              cornerRadius: 10,
-              customWidths: [153.w, 153.w],
-              customHeights: [47.h, 47.h],
-              borderWidth: 1,
-              borderColor: [Color(0xff41B9B8), Color(0xff41B9B8)],
-              inactiveBgColor: Color(0xff41B9B8),
-              activeBgColor: [Color(0xff81d9d9), Color(0xff81d9d9)],
-              customTextStyles: [
-                TextStyle(fontSize: 25.w, color: Colors.white),
-                TextStyle(fontSize: 25.w, color: Colors.white)
-              ],
-              labels: ['Monthly', 'Weekly'],
-              onToggle: (index) {
-                controller.setindex(index);
-              },
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Center(
+              child: ToggleSwitch(
+                initialLabelIndex: controller.toggleindex.value,
+                totalSwitches: 2,
+                cornerRadius: 10,
+                customWidths: [153.w, 153.w],
+                customHeights: [47.h, 47.h],
+                borderWidth: 1,
+                borderColor: [Color(0xff41B9B8), Color(0xff41B9B8)],
+                inactiveBgColor: Color(0xff41B9B8),
+                activeBgColor: [Color(0xff81d9d9), Color(0xff81d9d9)],
+                customTextStyles: [
+                  TextStyle(fontSize: 25.w, color: Colors.white),
+                  TextStyle(fontSize: 25.w, color: Colors.white)
+                ],
+                labels: ['Monthly', 'Weekly'],
+                onToggle: (index) {
+                  controller.setindex(index);
+                },
+              ),
             ),
-          ),
-          SizedBox(height: 20.h),
-          Obx(() {
-            return controller.toggleindex.value == 0
-                ? MonthyTabDesign(controller: controller)
-                : MonthyTabDesign(controller: controller);
-          })
-        ]),
+            SizedBox(height: 20.h),
+            Obx(() {
+              return controller.toggleindex.value == 0
+                  ? MonthyTabDesign()
+                  : MonthyTabDesign();
+            })
+          ]),
+        ),
       ),
     );
   }
