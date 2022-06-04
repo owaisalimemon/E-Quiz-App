@@ -1,14 +1,16 @@
-import 'package:e_quiz_app/controller/authcontroller.dart';
-import 'package:e_quiz_app/views/ui/signup.dart';
-import 'package:e_quiz_app/views/ui/widgets/circlebutton.dart';
-import 'package:e_quiz_app/views/ui/widgets/customtextfiled.dart';
-import 'package:e_quiz_app/views/ui/widgets/socialmediabutton.dart';
+import 'package:e_quiz_app/controller/AuthController.dart';
+import 'package:e_quiz_app/controller/DataController.dart';
+import 'package:e_quiz_app/views/ui/SignupScreen.dart';
+import 'package:e_quiz_app/views/ui/widgets/CircleButton.dart';
+import 'package:e_quiz_app/views/ui/widgets/CustomTextFiled.dart';
+import 'package:e_quiz_app/views/ui/widgets/SocialMediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
-  final controller = Get.put(AuthController());
+  final controller = Get.put(AuthController(), permanent: true);
+
   LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -87,6 +89,7 @@ class LoginScreen extends StatelessWidget {
                           controller: controller.loginemail,
                           icon: Icons.mail_outline_sharp,
                           obsecuretext: false,
+                          onPressed: () {},
                         ),
                         SizedBox(height: 10.h),
                         CustomTextFiled(
@@ -94,6 +97,7 @@ class LoginScreen extends StatelessWidget {
                           controller: controller.loginpassword,
                           icon: Icons.lock_outline_sharp,
                           obsecuretext: true,
+                          onPressed: () {},
                         ),
                         SizedBox(height: 5.h),
                         GestureDetector(
@@ -111,23 +115,25 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    controller.isLoading
-                        ? const CircularProgressIndicator()
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Log in",
-                                style: TextStyle(
-                                    fontSize: 30.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              CircleButton(onTap: () {
-                                controller.emialsignin();
-                              })
-                            ],
-                          ),
+                    GetBuilder<AuthController>(builder: (controller) {
+                      return controller.isLoading
+                          ? Center(child: const CircularProgressIndicator())
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Log in",
+                                  style: TextStyle(
+                                      fontSize: 30.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                CircleButton(onTap: () {
+                                  controller.emialsignin();
+                                })
+                              ],
+                            );
+                    }),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -1,26 +1,27 @@
 import 'dart:ffi';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:e_quiz_app/controller/authcontroller.dart';
-import 'package:e_quiz_app/controller/bottomnavcontroller.dart';
-import 'package:e_quiz_app/models/usersmodel.dart';
+import 'package:e_quiz_app/controller/AuthController.dart';
+import 'package:e_quiz_app/controller/Bottomnavcontroller.dart';
+import 'package:e_quiz_app/controller/DataController.dart';
+import 'package:e_quiz_app/models/UserModel.dart';
 
-import 'package:e_quiz_app/views/ui/getstartedscreen.dart';
-import 'package:e_quiz_app/views/ui/widgets/bubblemenu.dart';
+import 'package:e_quiz_app/views/ui/GetStartedScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends GetView<Bottomnavcontroller> {
-  final controller = Get.put(Bottomnavcontroller());
+class HomeScreen extends StatelessWidget {
+  var controller = Get.put(Bottomnavcontroller(), permanent: true);
+
   HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () => Future.value(true),
-        child: Obx(() {
+        child: GetBuilder<Bottomnavcontroller>(builder: (controller) {
           return Scaffold(
             backgroundColor: Colors.white,
             floatingActionButtonLocation:
@@ -34,8 +35,8 @@ class HomeScreen extends GetView<Bottomnavcontroller> {
               ),
               onPressed: () {
                 print('test');
-                if (!controller.checkforhome.value) {
-                  controller.checkforhome.value = true;
+                if (!controller.checkforhome) {
+                  controller.checkforhome = true;
                 }
               },
             ),
@@ -86,11 +87,11 @@ class HomeScreen extends GetView<Bottomnavcontroller> {
             //   animation: controller.setanimationvariable(),
             //   iconData: Icons.play_arrow_outlined,
             // ),
-            body: controller.checkforhome.value
+            body: controller.checkforhome
                 ? Container(
                     color: Colors.amber,
                   )
-                : controller.screens[controller.currentindex.value],
+                : SafeArea(child: controller.screens[controller.currentindex]),
             bottomNavigationBar: AnimatedBottomNavigationBar(
                 backgroundColor: Colors.white,
                 elevation: 10,
@@ -100,17 +101,17 @@ class HomeScreen extends GetView<Bottomnavcontroller> {
                   Icons.leaderboard_outlined,
                   Icons.person_outline
                 ],
-                activeIndex: controller.currentindex.value,
+                activeIndex: controller.currentindex,
                 iconSize: 40.w,
                 gapWidth: 2.w,
-                activeColor: controller.checkforhome.value
-                    ? Colors.black
-                    : Color(0xFF2CB4B3),
+                activeColor:
+                    controller.checkforhome ? Colors.black : Color(0xFF2CB4B3),
                 gapLocation: GapLocation.center,
                 notchSmoothness: NotchSmoothness.defaultEdge,
                 onTap: (value) {
                   controller.setindex(value);
-                  controller.checkforhome.value = false;
+                  controller.checkforhome = false;
+                  controller.update();
                 }),
           );
         }));

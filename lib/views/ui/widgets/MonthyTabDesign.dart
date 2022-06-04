@@ -1,6 +1,9 @@
-import 'package:e_quiz_app/controller/leaderboardcontroller.dart';
-import 'package:e_quiz_app/views/ui/login.dart';
-import 'package:e_quiz_app/views/ui/widgets/positionholderdesign.dart';
+import 'package:e_quiz_app/controller/DataController.dart';
+import 'package:e_quiz_app/controller/LeaderboardController.dart';
+
+import 'package:e_quiz_app/views/ui/LoginScreen.dart';
+import 'package:e_quiz_app/views/ui/UserProfile.dart';
+import 'package:e_quiz_app/views/ui/widgets/PositionHolderDesign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,6 +12,8 @@ class MonthyTabDesign extends StatelessWidget {
   MonthyTabDesign({Key? key}) : super(key: key);
 
   var controller = Get.put(permanent: true, LeaderboardController());
+
+  var datacontroller = Get.put(permanent: true, DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,7 @@ class MonthyTabDesign extends StatelessWidget {
               child: Text(
                 '1',
                 style: TextStyle(
-                    fontSize: 70.w,
+                    fontSize: 70.sp,
                     color: Colors.white,
                     fontFamily: 'Symbol,Regular'),
               ),
@@ -66,7 +71,7 @@ class MonthyTabDesign extends StatelessWidget {
               child: Text(
                 '2',
                 style: TextStyle(
-                    fontSize: 70.w,
+                    fontSize: 70.sp,
                     color: Colors.white,
                     fontFamily: 'Symbol,Regular'),
               ),
@@ -77,37 +82,43 @@ class MonthyTabDesign extends StatelessWidget {
               child: Text(
                 '3',
                 style: TextStyle(
-                    fontSize: 70.w,
+                    fontSize: 70.sp,
                     color: Colors.white,
                     fontFamily: 'Symbol,Regular'),
               ),
             ),
-            Positioned(
-              top: 40.h,
-              child: PositionHolderDesign(
-                  image: controller.userdata[0].image,
-                  name: controller.userdata[0].name,
-                  points: controller.userdata[0].points,
-                  first: true),
-            ),
-            Positioned(
-              top: 90.h,
-              left: 100.w,
-              child: PositionHolderDesign(
-                  image: controller.userdata[1].image,
-                  name: controller.userdata[1].name,
-                  points: controller.userdata[1].points,
-                  first: false),
-            ),
-            Positioned(
-              top: 113.h,
-              right: 73.w,
-              child: PositionHolderDesign(
-                  image: controller.userdata[2].image,
-                  name: controller.userdata[2].name,
-                  points: controller.userdata[2].points,
-                  first: false),
-            )
+            datacontroller.users!.length > 0
+                ? Positioned(
+                    bottom: 210.h,
+                    child: PositionHolderDesign(
+                        image: datacontroller.users![0].image,
+                        name: datacontroller.users![0].fullname,
+                        points: datacontroller.users![0].points,
+                        first: true),
+                  )
+                : SizedBox(),
+            datacontroller.users!.length >= 2
+                ? Positioned(
+                    left: 100.w,
+                    bottom: 160.h,
+                    child: PositionHolderDesign(
+                        image: datacontroller.users![1].image,
+                        name: datacontroller.users![1].fullname,
+                        points: datacontroller.users![1].points,
+                        first: false),
+                  )
+                : SizedBox(),
+            datacontroller.users!.length >= 3
+                ? Positioned(
+                    right: 73.w,
+                    bottom: 135.h,
+                    child: PositionHolderDesign(
+                        image: datacontroller.users![2].image,
+                        name: datacontroller.users![2].fullname,
+                        points: datacontroller.users![2].points,
+                        first: false),
+                  )
+                : SizedBox()
           ],
         ),
         Container(
@@ -120,7 +131,7 @@ class MonthyTabDesign extends StatelessWidget {
             padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: controller.userdata.length,
+              itemCount: datacontroller.users!.length,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Padding(
@@ -141,24 +152,24 @@ class MonthyTabDesign extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        controller.userdata[index].image))),
+                                        datacontroller.users![index].image))),
                           ),
                           title: Text(
-                            controller.userdata[index].name,
+                            datacontroller.users![index].fullname,
                             style:
-                                TextStyle(fontSize: 18.w, color: Colors.black),
+                                TextStyle(fontSize: 18.sp, color: Colors.black),
                           ),
                           subtitle: Row(
                             children: [
                               Text(
-                                controller.userdata[index].points.toString(),
+                                datacontroller.users![index].points.toString(),
                                 style: TextStyle(
-                                    fontSize: 15.w, color: Color(0xff2CB4B3)),
+                                    fontSize: 15.sp, color: Color(0xff2CB4B3)),
                               ),
                               Text(
                                 " Points",
                                 style: TextStyle(
-                                    fontSize: 15.w, color: Colors.black),
+                                    fontSize: 15.sp, color: Colors.black),
                               ),
                             ],
                           ),
@@ -170,7 +181,9 @@ class MonthyTabDesign extends StatelessWidget {
                                     onTap: () {
                                       if (controller.selectedprofileindex ==
                                           index) {
-                                        Get.to(LoginScreen());
+                                        Get.to(UserProfile(
+                                          user: datacontroller.users![index],
+                                        ));
                                       }
                                       controller.chaangeselectedprofile(index);
                                       controller.update();
@@ -193,7 +206,7 @@ class MonthyTabDesign extends StatelessWidget {
                                               ? "Profile"
                                               : ' ',
                                           style: TextStyle(
-                                              fontSize: 12.w,
+                                              fontSize: 12.sp,
                                               color: Colors.white),
                                         ),
                                       ),

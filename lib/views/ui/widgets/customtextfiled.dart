@@ -6,12 +6,14 @@ class CustomTextFiled extends StatelessWidget {
       {required this.hinttext,
       required this.controller,
       required this.icon,
-      required this.obsecuretext});
+      required this.obsecuretext,
+      required this.onPressed});
 
   String hinttext;
   TextEditingController controller;
   IconData icon;
   bool obsecuretext;
+  Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,15 @@ class CustomTextFiled extends StatelessWidget {
         obscureText: obsecuretext,
         decoration: InputDecoration(
           hintText: hinttext,
-          suffixIcon: Icon(
-            icon,
-            color: Colors.black,
-            size: 20.w,
+          suffixIcon: IconButton(
+            onPressed: () {
+              onPressed();
+            },
+            icon: Icon(
+              icon,
+              color: Colors.black,
+              size: 20.sp,
+            ),
           ),
           contentPadding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
           enabledBorder: UnderlineInputBorder(

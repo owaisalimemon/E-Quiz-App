@@ -1,17 +1,17 @@
-import 'package:e_quiz_app/controller/AuthController.dart';
 import 'package:e_quiz_app/controller/ExtraController.dart';
+import 'package:e_quiz_app/models/UserModel.dart';
 import 'package:e_quiz_app/views/ui/widgets/ImageWithCrown.dart';
-
 import 'package:e_quiz_app/views/ui/widgets/ProfileInfoDesign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class ProfileTab extends StatelessWidget {
-  var usermodel = Get.put(AuthController());
+class UserProfile extends StatelessWidget {
+  UserProfile({required this.user});
 
   var extra = Get.put(ExtraController());
-  ProfileTab({Key? key}) : super(key: key);
+
+  UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +36,15 @@ class ProfileTab extends StatelessWidget {
               color: Color(0xff008280),
               fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.settings_outlined,
-                color: Color(0xff008280),
-                size: 36.w,
-              ))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.settings_outlined,
+        //         color: Color(0xff008280),
+        //         size: 36.w,
+        //       ))
+        // ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -66,7 +66,7 @@ class ProfileTab extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          usermodel.userModel!.fullname,
+                          user.fullname,
                           style:
                               TextStyle(fontSize: 25.sp, color: Colors.black),
                         ),
@@ -74,14 +74,14 @@ class ProfileTab extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Code :  ${usermodel.userModel!.uid}",
+                              "Code : ${user.uid}",
                               style: TextStyle(
                                   fontSize: 12.sp, color: Colors.black),
                             ),
                             SizedBox(width: 5.w),
                             GestureDetector(
                               onTap: () {
-                                extra.copytoclipboard(usermodel.userModel!.uid);
+                                extra.copytoclipboard(user.uid);
                               },
                               child: Icon(
                                 Icons.content_copy,
@@ -104,7 +104,7 @@ class ProfileTab extends StatelessWidget {
                               ProfileInfoDesign(
                                   icon: Icons.grade_outlined,
                                   title: 'Points',
-                                  pointsorrank: usermodel.userModel!.points,
+                                  pointsorrank: user.points,
                                   hash: false),
                               Container(
                                 height: 77.h,
@@ -114,7 +114,7 @@ class ProfileTab extends StatelessWidget {
                               ProfileInfoDesign(
                                   icon: Icons.public,
                                   title: 'World Rank',
-                                  pointsorrank: usermodel.userModel!.worldrank,
+                                  pointsorrank: user.worldrank,
                                   hash: true),
                               Container(
                                 height: 77.h,
@@ -124,7 +124,7 @@ class ProfileTab extends StatelessWidget {
                               ProfileInfoDesign(
                                   icon: Icons.tag,
                                   title: 'Social Rank',
-                                  pointsorrank: usermodel.userModel!.socialrank,
+                                  pointsorrank: user.socialrank,
                                   hash: true)
                             ],
                           ),

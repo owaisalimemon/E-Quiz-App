@@ -26,13 +26,15 @@ class ProfileInfoDesign extends StatelessWidget {
         SizedBox(height: 5.h),
         Text(
           title,
-          style: TextStyle(fontSize: 15.w, color: Colors.white),
+          style: TextStyle(fontSize: 15.sp, color: Colors.white),
         ),
         SizedBox(height: 5.h),
         Text(
           hash ? '#' + pointsorrank.toString() : '' + pointsorrank.toString(),
           style: TextStyle(
-              fontSize: 15.w, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: 15.sp,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
         )
       ],
     );

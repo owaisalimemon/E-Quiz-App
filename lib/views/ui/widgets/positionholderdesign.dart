@@ -41,9 +41,15 @@ class PositionHolderDesign extends StatelessWidget {
                 : SizedBox(),
           ],
         ),
-        Text(
-          name,
-          style: TextStyle(fontSize: 15.w, color: Colors.black),
+        Container(
+          width: 70.w,
+          child: Center(
+            child: Text(
+              name,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15.sp, color: Colors.black),
+            ),
+          ),
         ),
         Positioned(
           child: Container(
@@ -58,7 +64,7 @@ class PositionHolderDesign extends StatelessWidget {
               children: [
                 Text(
                   points.toString(),
-                  style: TextStyle(fontSize: 15.w, color: Colors.white),
+                  style: TextStyle(fontSize: 15.sp, color: Colors.white),
                 ),
                 Align(
                   alignment: Alignment.topCenter,

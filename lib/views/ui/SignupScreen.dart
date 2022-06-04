@@ -1,8 +1,8 @@
-import 'package:e_quiz_app/controller/authcontroller.dart';
-import 'package:e_quiz_app/views/ui/login.dart';
-import 'package:e_quiz_app/views/ui/widgets/circlebutton.dart';
-import 'package:e_quiz_app/views/ui/widgets/customtextfiled.dart';
-import 'package:e_quiz_app/views/ui/widgets/socialmediabutton.dart';
+import 'package:e_quiz_app/controller/AuthController.dart';
+import 'package:e_quiz_app/views/ui/LoginScreen.dart';
+import 'package:e_quiz_app/views/ui/widgets/CircleButton.dart';
+import 'package:e_quiz_app/views/ui/widgets/CustomTextFiled.dart';
+import 'package:e_quiz_app/views/ui/widgets/SocialMediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -82,6 +82,7 @@ class SignupScreen extends StatelessWidget {
                           controller: controller.sinupusername,
                           icon: Icons.person_outline_outlined,
                           obsecuretext: false,
+                          onPressed: () {},
                         ),
                         SizedBox(height: 10.h),
                         CustomTextFiled(
@@ -89,6 +90,7 @@ class SignupScreen extends StatelessWidget {
                           controller: controller.signupemail,
                           icon: Icons.mail_outline_sharp,
                           obsecuretext: false,
+                          onPressed: () {},
                         ),
                         SizedBox(height: 10.h),
                         CustomTextFiled(
@@ -96,6 +98,7 @@ class SignupScreen extends StatelessWidget {
                           controller: controller.signuppassword,
                           icon: Icons.lock_outline_sharp,
                           obsecuretext: true,
+                          onPressed: () {},
                         ),
                         SizedBox(height: 5.h),
                         GestureDetector(
@@ -112,23 +115,25 @@ class SignupScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    controller.signupisloading
-                        ? const CircularProgressIndicator()
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Sign up",
-                                style: TextStyle(
-                                    fontSize: 30.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              CircleButton(onTap: () {
-                                controller.emialsignuip();
-                              })
-                            ],
-                          ),
+                    GetBuilder<AuthController>(builder: (controller) {
+                      return controller.signupisloading
+                          ? Center(child: const CircularProgressIndicator())
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                      fontSize: 30.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                CircleButton(onTap: () {
+                                  controller.emialsignuip();
+                                })
+                              ],
+                            );
+                    }),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

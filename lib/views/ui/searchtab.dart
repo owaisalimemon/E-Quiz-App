@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_quiz_app/controller/datacontroller.dart';
-import 'package:e_quiz_app/views/ui/categoryscree.dart';
+import 'package:e_quiz_app/controller/DataController.dart';
+import 'package:e_quiz_app/views/ui/CategoryScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -222,11 +222,11 @@ class SearchTab extends StatelessWidget {
                                           Container(
                                             height: 62.28.h,
                                             width: 62.28.w,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/images/Group 13 black@2x.png'))),
+                                                    image: AssetImage(controller
+                                                        .users![0].image))),
                                           ),
                                           SizedBox(width: 10.w),
                                           Column(
@@ -234,7 +234,7 @@ class SearchTab extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Syed Izhan',
+                                                controller.users![0].fullname,
                                                 style: TextStyle(
                                                     fontSize: 20.sp,
                                                     color: const Color(
@@ -247,7 +247,7 @@ class SearchTab extends StatelessWidget {
                                                     CrossAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    '1024 Points',
+                                                    '${controller.users![0].points} Points',
                                                     style: TextStyle(
                                                         fontSize: 12.sp,
                                                         color: const Color(
@@ -339,10 +339,15 @@ class SearchTab extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(4)),
                                           child: Center(
-                                            child: Icon(
-                                              Icons.science_outlined,
-                                              color: Colors.white,
-                                              size: 37.w,
+                                            child: ColorFiltered(
+                                              child: Image.network(
+                                                controller
+                                                    .categories![index].image,
+                                                scale: 3.sp,
+                                              ),
+                                              colorFilter: ColorFilter.mode(
+                                                  Colors.white,
+                                                  BlendMode.srcATop),
                                             ),
                                           ),
                                         ),
@@ -355,7 +360,7 @@ class SearchTab extends StatelessWidget {
                                         ),
                                         SizedBox(height: 5.h),
                                         Text(
-                                          "${controller.liveclasses[0].questionsno} Question",
+                                          "12 Question",
                                           style: TextStyle(
                                               fontSize: 10.sp,
                                               color: Colors.white),

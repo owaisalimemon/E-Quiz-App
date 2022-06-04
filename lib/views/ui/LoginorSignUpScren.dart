@@ -1,6 +1,6 @@
-import 'package:e_quiz_app/views/ui/login.dart';
-import 'package:e_quiz_app/views/ui/signup.dart';
-import 'package:e_quiz_app/views/ui/widgets/roundedbutton.dart';
+import 'package:e_quiz_app/views/ui/LoginScreen.dart';
+import 'package:e_quiz_app/views/ui/SignupScreen.dart';
+import 'package:e_quiz_app/views/ui/widgets/RoundedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

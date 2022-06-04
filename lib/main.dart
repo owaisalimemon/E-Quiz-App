@@ -1,7 +1,6 @@
-import 'package:e_quiz_app/views/ui/getstartedscreen.dart';
-import 'package:e_quiz_app/views/ui/homeScreen.dart';
-import 'package:e_quiz_app/views/ui/loginorsigninscreen.dart';
-
+import 'package:e_quiz_app/views/ui/GetStartedScreen.dart';
+import 'package:e_quiz_app/views/ui/HomeScreen.dart';
+import 'package:e_quiz_app/views/ui/LoginorSignUpScren.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +17,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
-        theme: ThemeData(fontFamily: 'Nexa'),
         home: GetStartedScreen(),
+        theme: ThemeData(fontFamily: 'Nexa'),
       ),
-      designSize: Size(428, 926),
+      designSize: const Size(428, 926),
     );
   }
 }
