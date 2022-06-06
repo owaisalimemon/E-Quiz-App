@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_quiz_app/controller/DataController.dart';
 import 'package:e_quiz_app/views/ui/CategoryScreen.dart';
+import 'package:e_quiz_app/views/ui/LevelPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -318,54 +319,67 @@ class SearchTab extends StatelessWidget {
                                       mainAxisSpacing: 10),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.h),
-                                  child: Container(
-                                    height: 150.h,
-                                    width: 178.w,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: const Color(0xff41B9B8)),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 49.h,
-                                          width: 55.w,
-                                          decoration: BoxDecoration(
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(4)),
-                                          child: Center(
-                                            child: ColorFiltered(
-                                              child: Image.network(
-                                                controller
-                                                    .categories![index].image,
-                                                scale: 3.sp,
+                                return GestureDetector(
+                                  onTap: () async {
+                                    await controller.getlevelslits(
+                                        controller.categories![index].cid);
+
+                                    await Get.to(LevelPage(
+                                      catname:
+                                          controller.categories![index].name,
+                                    ));
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 5.h),
+                                    child: Container(
+                                      height: 150.h,
+                                      width: 178.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: const Color(0xff41B9B8)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 49.h,
+                                            width: 55.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                                borderRadius:
+                                                    BorderRadius.circular(4)),
+                                            child: Center(
+                                              child: ColorFiltered(
+                                                child: Image.network(
+                                                  controller
+                                                      .categories![index].image,
+                                                  scale: 3.sp,
+                                                ),
+                                                colorFilter: ColorFilter.mode(
+                                                    Colors.white,
+                                                    BlendMode.srcATop),
                                               ),
-                                              colorFilter: ColorFilter.mode(
-                                                  Colors.white,
-                                                  BlendMode.srcATop),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 15.h),
-                                        Text(
-                                          controller.categories![index].name,
-                                          style: TextStyle(
-                                              fontSize: 19.sp,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(height: 5.h),
-                                        Text(
-                                          "12 Question",
-                                          style: TextStyle(
-                                              fontSize: 10.sp,
-                                              color: Colors.white),
-                                        )
-                                      ],
+                                          SizedBox(height: 15.h),
+                                          Text(
+                                            controller.categories![index].name,
+                                            style: TextStyle(
+                                                fontSize: 19.sp,
+                                                color: Colors.white),
+                                          ),
+                                          SizedBox(height: 5.h),
+                                          Text(
+                                            "12 Question",
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

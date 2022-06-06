@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_quiz_app/models/CategoryModel.dart';
+import 'package:e_quiz_app/models/LevelModel.dart';
 import 'package:e_quiz_app/models/SubCategoryModel.dart';
 import 'package:e_quiz_app/models/UserModel.dart';
 
@@ -32,6 +33,10 @@ class DataController extends GetxController {
   QuerySnapshot? querySnapshotsubcategory;
 
   List<SubCategoryModel>? subcategory;
+
+  QuerySnapshot? querySnapshotlevels;
+
+  List<LevelModel>? levels;
 
   selectindex(index) {
     selectedindex = index;
@@ -96,5 +101,20 @@ class DataController extends GetxController {
     }
 
     return '';
+  }
+
+  Future<void> getlevelslits(String catid) async {
+    levels = await getleveldatadata(catid);
+  }
+
+  Future<List<LevelModel>> getleveldatadata(String catid) async {
+    querySnapshotsubcategory = await FirebaseFirestore.instance
+        .collection('levels')
+        .orderBy('level', descending: false)
+        .get();
+
+    return querySnapshotsubcategory!.docs
+        .map((e) => LevelModel.fromJson(e.data()))
+        .toList();
   }
 }
